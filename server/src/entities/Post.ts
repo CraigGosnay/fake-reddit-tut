@@ -4,7 +4,7 @@ import { Field, Int, ObjectType } from "type-graphql";
 @ObjectType() // also a graphql type
 @Entity() // defines a DB table
 export class Post {
-  @Field() // exposes to graphql schema
+  @Field(() => Int) // exposes to graphql schema
   @PrimaryKey()
   id!: number;
 
