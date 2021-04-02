@@ -1,6 +1,4 @@
-import { Logger } from "@mikro-orm/core";
 import argon2 from "argon2";
-import { isInputObjectType } from "graphql";
 import {
   Arg,
   Ctx,
@@ -8,7 +6,7 @@ import {
   InputType,
   Mutation,
   ObjectType,
-  Resolver,
+  Resolver
 } from "type-graphql";
 import { User } from "../entities/User";
 import { MyContext } from "../types";
@@ -55,7 +53,7 @@ export class UserResolver {
     }
 
     if (input.password.length < 3) {
-      // use a validation library in real life
+      // use a validation library in "real life"
       return {
         errors: [
           {
@@ -119,6 +117,9 @@ export class UserResolver {
         ],
       } as UserResponse;
     }
+
+    ctx.req.session.userId = user.id;
+
     return {
       user,
     } as UserResponse;
